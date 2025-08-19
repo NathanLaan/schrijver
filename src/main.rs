@@ -14,7 +14,7 @@ use device::{UsbDevice, detect_usb_devices};
 use error::WriterError;
 
 pub fn main() -> iced::Result {
-    IsoUsbWriter::run(Settings {
+    SchrijverApplication::run(Settings {
         window: iced::window::Settings {
             size: iced::Size::new(800.0, 480.0),
             ..Default::default()
@@ -35,7 +35,7 @@ pub enum Message {
     WriteCompleted(Result<(), WriterError>),
 }
 
-struct IsoUsbWriter {
+struct SchrijverApplication {
     iso_path: Option<PathBuf>,
     selected_device: Option<UsbDevice>,
     available_devices: Vec<UsbDevice>,
@@ -54,7 +54,7 @@ pub enum AppState {
     Error(String),
 }
 
-impl Default for IsoUsbWriter {
+impl Default for SchrijverApplication {
     fn default() -> Self {
         Self {
             iso_path: None,
@@ -68,10 +68,10 @@ impl Default for IsoUsbWriter {
     }
 }
 
-impl Application for IsoUsbWriter {
+impl Application for SchrijverApplication {
+    type Executor = iced::executor::Default;
     type Message = Message;
     type Theme = Theme;
-    type Executor = iced::executor::Default;
     type Flags = ();
 
     fn new(_flags: ()) -> (Self, Command<Message>) {
@@ -224,7 +224,7 @@ impl Application for IsoUsbWriter {
     }
 }
 
-impl IsoUsbWriter {
+impl SchrijverApplication {
     fn can_write(&self) -> bool {
         self.iso_path.is_some() && self.selected_device.is_some() && !self.is_writing
     }
