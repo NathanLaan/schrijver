@@ -16,7 +16,7 @@ use error::WriterError;
 pub fn main() -> iced::Result {
     IsoUsbWriter::run(Settings {
         window: iced::window::Settings {
-            size: iced::Size::new(600.0, 400.0),
+            size: iced::Size::new(800.0, 480.0),
             ..Default::default()
         },
         ..Default::default()
@@ -213,8 +213,7 @@ impl Application for IsoUsbWriter {
             status_section,
         ]
             .spacing(20)
-            .padding(20)
-            .max_width(600);
+            .padding(20);
 
         container(content)
             .width(Length::Fill)

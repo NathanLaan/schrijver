@@ -57,8 +57,8 @@ async fn detect_linux_usb_devices() -> Vec<UsbDevice> {
             if fields.len() >= 4 {
                 let device_name = fields[3];
 
-                // Only consider removable complete devices (not partitions)
-                if !device_name.chars().last().unwrap_or('0').is_ascii_digit() {
+                // FIXSkip devices that DO end with numbers (partitions)
+                if device_name.chars().last().unwrap_or('0').is_ascii_digit() {
                     continue;
                 }
 
