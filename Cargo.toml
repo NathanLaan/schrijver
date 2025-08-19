@@ -1,0 +1,18 @@
+[package]
+name = "schrijver"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+iced = { version = "0.12", features = ["tokio", "debug"] }
+tokio = { version = "1.0", features = ["full"] }
+rfd = "0.14"
+serde = { version = "1.0", features = ["derive"] }
+thiserror = "1.0"
+nix = "0.29"
+libc = "0.2"
+
+# For file system operations and device detection
+[target.'cfg(target_os = "linux")'.dependencies]
+udev = "0.8"
+
